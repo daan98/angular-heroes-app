@@ -1,5 +1,37 @@
-<h1>LoginPage</h1>
+<!-- Header -->
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav mode="push" [ngStyle]="{ width: '250px' }">
+        <mat-toolbar color="primary">
+            <span>Menu</span>
+            <span class="spacer"></span>
 
-<router-outlet></router-outlet>
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon fontIcon="menu"></mat-icon>
+            </button>
+        </mat-toolbar>
+
+        <mat-nav-list>
+            <mat-list-item
+                *ngFor="let item of toolbarItems"
+                [routerLink]="item.url"
+                (click)="sidenav.toggle()"
+            >
+                <mat-icon matListItemIcon [fontIcon]="item.icon"></mat-icon>
+                {{ item.label }}
+            </mat-list-item>
+        </mat-nav-list>
+        
+    </mat-sidenav>
+
+    <mat-toolbar color="primary">
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon fontIcon="menu"></mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <div class="container p-2 px-3">
+        <router-outlet></router-outlet>
+    </div>
+</mat-sidenav-container>
 
 <h3>FooterPage</h3>

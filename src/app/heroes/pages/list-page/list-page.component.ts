@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HeroService } from '../../services/heroes.service';
+import { Observable, retry } from 'rxjs';
+import { HeroInteraface } from '../../interfaces';
 
 @Component({
   selector: 'heroes-list-page',
@@ -6,6 +9,21 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class ListPageComponent {
+export class ListPageComponent implements OnInit {
 
+  public heroes : HeroInteraface[] = [];
+  
+  constructor( private heroesService : HeroService ) {  }
+
+  ngOnInit(): void {
+    this.retireveHeros();
+  }
+
+  private retireveHeros() : void {
+    this.heroesService.getHeroes().subscribe(
+      (response : HeroInteraface[]) => {
+        this.heroes = response;
+      }
+    );
+  }
 }
