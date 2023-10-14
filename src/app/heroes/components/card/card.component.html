@@ -1,13 +1,12 @@
-<mat-card class="m-2">
+<mat-card class="m-2 h-full justify-content-between">
     <mat-card-header class="mb-2">
         <mat-card-title> {{ hero.superhero }} </mat-card-title>
         <mat-card-subtitle> {{ hero.alter_ego }} </mat-card-subtitle>
     </mat-card-header>
     
-    <!-- TODO: image -->
-    <img matCardImage [src]="hero | heroImage" [alt]="hero.superhero">
+    <img matCardImage [src]="hero | heroImage" [alt]="hero.superhero" class="h-full" style="object-fit: cover; object-position: center;" >
 
-    <mat-card-content class="my-3">
+    <mat-card-content class="mt-3">
         <h4 class="m-0 pb-2">{{ hero.publisher }}</h4>
 
         <p class="mb-0 pb-2">
@@ -19,28 +18,28 @@
                 {{ name }}
             </mat-chip>
         </mat-chip-listbox>
+
+        <mat-divider class="my-3"></mat-divider>
+
+        <mat-card-actions>
+            <button
+                mat-button
+                color="accent"
+                [routerLink]="['/heroes/edit', hero.id]"
+            >
+                <mat-icon fontIcon="edit"></mat-icon>
+                Edit
+            </button>
+
+            <span class="spacer"></span>
+
+            <button
+                mat-button
+                color="primary"
+                [routerLink]="['/heroes', hero.id]"
+            >
+                <mat-icon fontIcon="more_horiz"></mat-icon>
+            </button>
+        </mat-card-actions>
     </mat-card-content>
-
-    <mat-divider></mat-divider>
-
-    <mat-card-actions>
-        <button
-            mat-button
-            color="accent"
-            [routerLink]="['/heroes/edit', hero.id]"
-        >
-            <mat-icon fontIcon="edit"></mat-icon>
-            Edit
-        </button>
-
-        <span class="spacer"></span>
-
-        <button
-            mat-button
-            color="primary"
-            [routerLink]="['/heroes', hero.id]"
-        >
-            <mat-icon fontIcon="more_horiz"></mat-icon>
-        </button>
-    </mat-card-actions>
 </mat-card>

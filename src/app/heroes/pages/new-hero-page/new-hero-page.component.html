@@ -1,1 +1,110 @@
-<p>new-page works!</p>
+<h1>
+    Edit / Add hero <small>superman</small>
+</h1>
+
+<mat-divider class="mb-2"></mat-divider>
+
+<div class="grid">
+    <div class="col-12 sm:col-6">
+        <mat-card>
+            <mat-card-content>
+                <form 
+                    class="grid"
+                    [formGroup]="heroForm"
+                    (ngSubmit)="onSubmitForm()"
+                >
+                    <mat-form-field class="col-12 sm:col-6">
+                        <mat-label>Superhero</mat-label>
+                        <input
+                            matInput
+                            type="text"
+                            required
+                            formControlName="superhero"
+                        >
+                    </mat-form-field>
+    
+                    <mat-form-field class="col-12 sm:col-6">
+                        <mat-label>Alterego</mat-label>
+                        <input
+                            matInput
+                            type="text"
+                            required
+                            formControlName="alter_ego"
+                        >
+                    </mat-form-field>
+    
+                    <mat-form-field class="col-12">
+                        <mat-label>First Appearance</mat-label>
+                        <input
+                            matInput
+                            type="text"
+                            required
+                            formControlName="first_appearance"
+                        >
+                    </mat-form-field>
+    
+                    <mat-form-field class="col-12">
+                        <mat-label>Characters</mat-label>
+                        <input
+                            matInput
+                            type="text"
+                            required
+                            formControlName="characters"
+                        >
+                    </mat-form-field>
+    
+                    <mat-form-field class="col-12">
+                        <mat-label>Publisher</mat-label>
+                        <mat-select
+                            required
+                            formControlName="publisher"
+                        >
+                            <mat-option 
+                                *ngFor="let publisher of publishers"
+                                [value]="publisher.id"
+                            >
+                                {{  publisher.label }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12">
+                        <mat-label>Alternative Image</mat-label>
+                        <input
+                            matInput
+                            type="text"
+                            formControlName="alter_img"
+                        >
+                    </mat-form-field>
+                </form>
+
+                <!-- Buttons -->
+
+                <div class="flex justify-content-between">
+                    <button
+                        mat-flat-button
+                        color="warn"
+                    >
+                        <mat-icon fontIcon="delete"></mat-icon>
+                        Delete
+                    </button>
+
+                    <button
+                        mat-flat-button
+                        color="primary"
+                        (click)="onSubmitForm()"
+                    >
+                        <mat-icon fontIcon="save"></mat-icon>
+                        Edit
+                    </button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="col-12 sm:col-6">
+        <mat-card>
+            <img [src]="currentHero | heroImage" alt="superhero name" mat-card-image>
+        </mat-card>
+    </div>
+</div>

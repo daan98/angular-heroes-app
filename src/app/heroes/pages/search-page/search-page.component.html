@@ -1,1 +1,26 @@
-<p>search-page works!</p>
+<div class="flex flex-column">
+    <h3>Shearcher</h3>
+
+    <mat-form-field>
+        <mat-label>Heroes</mat-label>
+        <input
+            type="text"
+            placeholder="type your hero"
+            aria-label="Text"
+            matInput
+            [formControl]="heroesControl"
+            [matAutocomplete]="auto"
+            (input)="onSearchhero()"
+        >
+
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let hero of heroes" [value]="hero" (onSelectionChange)="onSeletedOption($event)">
+                {{ hero.superhero }}
+            </mat-option>
+
+            <mat-option *ngIf="heroes.length === 0 && heroesControl.value && heroesControl.value.length != 0">
+                No hero was found
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</div>
