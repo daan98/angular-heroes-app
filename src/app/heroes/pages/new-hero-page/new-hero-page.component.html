@@ -1,5 +1,5 @@
 <h1>
-    Edit / Add hero <small>superman</small>
+    {{ currentHero.id ? 'Edit' :  'Add' }} hero
 </h1>
 
 <mat-divider class="mb-2"></mat-divider>
@@ -77,25 +77,25 @@
                         >
                     </mat-form-field>
                 </form>
-
-                <!-- Buttons -->
-
+                
                 <div class="flex justify-content-between">
                     <button
-                        mat-flat-button
+                        mat-raised-button
                         color="warn"
+                        (click)="onDeleteHero('500ms', '100ms')"
+                        [disabled]="currentHero.id ? false : true"
                     >
                         <mat-icon fontIcon="delete"></mat-icon>
                         Delete
                     </button>
 
                     <button
-                        mat-flat-button
+                        mat-raised-button
                         color="primary"
                         (click)="onSubmitForm()"
                     >
-                        <mat-icon fontIcon="save"></mat-icon>
-                        Edit
+                        <mat-icon [fontIcon]="currentHero.id ? 'edit' : 'save'"></mat-icon>
+                        {{ currentHero.id ? 'Edit' : 'Save' }}
                     </button>
                 </div>
             </mat-card-content>

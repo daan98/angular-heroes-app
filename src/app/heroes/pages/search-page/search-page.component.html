@@ -24,3 +24,61 @@
         </mat-autocomplete>
     </mat-form-field>
 </div>
+
+<!-- <ng-template #divLoading>
+    <mat-grid-list>
+        <mat-grid-tile>
+            <mat-spinner></mat-spinner>
+        </mat-grid-tile>
+    </mat-grid-list>
+</ng-template> -->
+
+<div *ngIf="filteredOptions" class="grid">
+    <div class="col-12 sm:col-6">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>{{ filteredOptions.alter_ego }}</mat-card-title>
+                <mat-card-subtitle>{{ filteredOptions.superhero }}</mat-card-subtitle>
+            </mat-card-header>
+    
+            <img [src]="filteredOptions| heroImage" [alt]="filteredOptions.superhero" mat-card-image>
+        </mat-card>
+    </div>
+
+    <div class="col-12 sm:col-6">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Information</mat-card-title>
+                <mat-card-subtitle>{{ filteredOptions.superhero }}</mat-card-subtitle>
+            </mat-card-header>
+    
+            <mat-card-content>
+                <mat-list>
+                    <mat-list-item class="mb-2">
+                        <span class="font-medium text-xl capitalize">first appearance</span>
+                        <br>
+                        {{ filteredOptions.first_appearance }}
+                    </mat-list-item>
+
+                    <mat-list-item class="mb-2">
+                        <span class="font-medium text-xl capitalize">characters</span>
+                        <br>
+                        {{ filteredOptions.characters }}
+                    </mat-list-item>
+
+                    <mat-list-item class="mb-2">
+                        <span class="font-medium text-xl capitalize">publisher</span>
+                        <br>
+                        {{ filteredOptions.publisher }}
+                    </mat-list-item>
+
+                    <mat-list-item class="mb-2">
+                        <span class="font-medium text-xl capitalize">alter ego </span>
+                        <br>
+                        {{ filteredOptions.alter_ego }}
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

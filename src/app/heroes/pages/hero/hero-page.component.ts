@@ -13,16 +13,11 @@ import { map, switchMap } from 'rxjs';
 export class HeroPageComponent implements OnInit {
   public hero ?: HeroInteraface;
 
-  constructor(private heroesService : HeroService, private activatedRoute : ActivatedRoute, private router : Router) {
-    console.log('activatedRoute: ', activatedRoute);
-    // console.log('rootSnapshot: ', rootSnapshot);
-    /* const id = root.params.pipe(map(p => p));
-    console.log('id value --> ', id); */
-    /* root.queryParams.subscribe(params => {
-      console.log(params);
-    }); */
-    
-  }
+  constructor(
+    private heroesService : HeroService,
+    private activatedRoute : ActivatedRoute,
+    private router : Router
+  ) { }
 
   ngOnInit(): void {
     this.retrieveHeroInfo();
@@ -35,7 +30,6 @@ export class HeroPageComponent implements OnInit {
       )
       .subscribe(
         (response : HeroInteraface | undefined) => {
-          console.log('RESPONSE: ', response);
           if (!response) {
             return this.router.navigate(['heroes/list']);
           }

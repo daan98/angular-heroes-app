@@ -111,7 +111,8 @@
       "publisher": "Marvel Comics",
       "alter_ego": "Tony Stark",
       "first_appearance": "Tales of Suspense #39",
-      "characters": "Tony Stark"
+      "characters": "Tony Stark",
+      "alter_img": null
     },
     {
       "id": "marvel-thor",
@@ -168,15 +169,6 @@
       "alter_ego": "Norrin Radd",
       "first_appearance": "The Fantastic Four #48",
       "characters": "Norrin Radd"
-    },
-    {
-      "id": "mw7UDqW",
-      "superhero": "test hero",
-      "publisher": "DC - Comics",
-      "alter_ego": "testego",
-      "first_appearance": "tested comic #1",
-      "characters": "test character",
-      "alter_img": "https://i.pinimg.com/originals/a1/c6/b6/a1c6b6938c78d80db24e605a3786a9be.jpg"
     }
   ]
 }

@@ -1,12 +1,14 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { switchMap } from 'rxjs';
+import { filter, switchMap } from 'rxjs';
 
 
 import { EmptyFieldInterface, HeroInteraface, Publisher } from '../../interfaces';
 import { HeroService } from '../../services/heroes.service';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'heroes-new-hero-page',
@@ -42,6 +44,7 @@ export class NewHeroPageComponent implements OnInit {
     private activateRoute : ActivatedRoute,
     private router        : Router,
     private snackbar      : MatSnackBar,
+    private dialog        : MatDialog,
   ) {  }
 
   ngOnInit(): void {
@@ -57,16 +60,10 @@ export class NewHeroPageComponent implements OnInit {
 
   public onSubmitForm() : void {
     if (this.heroForm.invalid) {
-      console.log('heroForm: ', this.heroForm);
-      console.log('values: ', Object.values(this.heroForm.value));
-      console.log('values: ', typeof Object.values(this.heroForm.value));
-
       const fieldsValueArray : [] = Object.values(this.heroForm.value) as [];
       const fieldsTitleArray : [] = Object.keys(this.heroForm.value) as [];
       const emptyFieldFound = this.checkEmptyFields(fieldsValueArray, fieldsTitleArray);
-
-      // console.log('emptyFieldFound.field: ', emptyFieldFound.field);
-      console.log('emptyFieldFound.amount: ', emptyFieldFound.amount);
+      
       this.showSnackbar(emptyFieldFound.message);
       return;
     }
@@ -107,6 +104,31 @@ export class NewHeroPageComponent implements OnInit {
     this.snackbar.open(message, 'done', {
       duration: 2500,
     });
+  }
+
+  public onDeleteHero(enterAnimationDuration: string, exitAnimationDuration: string) : void {
+    if (!this.currentHero.id) {
+      throw new Error('superhero Id is needed.');
+      return;
+    }
+
+    const dialogRef =  this.dialog.open(ConfirmDialogComponent, {
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: this.currentHero
+    });
+
+    dialogRef.afterClosed()
+      .pipe(
+        filter((result : boolean) => result),
+        switchMap(() => this.heroesService.deleteHero(this.currentHero.id)),
+        filter((wasDeleted : boolean) => wasDeleted)
+      )
+      .subscribe(
+      () => {
+        this.router.navigate(['/heroes']);
+      }
+    )
   }
 
   private checkEmptyFields(fields: [], fieldsTitle : []) : EmptyFieldInterface {

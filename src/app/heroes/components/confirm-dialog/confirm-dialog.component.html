@@ -1,0 +1,36 @@
+<h1 
+  mat-dialog-title 
+  class="text-center"
+>
+  Delete Hero
+</h1>
+
+<div mat-dialog-content>
+  You are about to delete {{ data.superhero }}. Are you sure?. This action can not be undone.
+</div>
+
+<div 
+  mat-dialog-actions 
+  class="flex flex-column sm:flex-row justify-content-center row-gap-3 pb-3 sm:column-gap-3 sm:row-gap-0"
+>
+  <button 
+    mat-raised-button 
+    mat-dialog-close 
+    cdkFocusInitial 
+    color="primary" 
+    class="w-full sm:w-fit" 
+    (click)="onClickCancel()"
+  >
+    Cancel
+  </button>
+
+  <button 
+    mat-raised-button 
+    mat-dialog-close 
+    color="warn" 
+    class="w-full sm:w-fit" 
+    (click)="onClickConfirm()"
+  >
+    Confirm
+  </button>
+</div>
