@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserInterface } from 'src/app/auth/interfaces';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { ToolbarItemsInterface } from 'src/app/shared/interface';
 
 @Component({
@@ -13,4 +16,17 @@ export class LayoutPageComponent {
     { label: 'Search', icon: 'search', url: '/heroes/search' },
     { label: 'Add', icon: 'add', url: '/heroes/new-hero' },
   ];
+
+  constructor(
+    private authService     : AuthService,
+    private router          : Router,
+  ) { }
+
+  get currentUser() : UserInterface | undefined {
+    return this.authService.getCurrentUser();
+  }
+  public doLogout() {
+    this.authService.logout();
+    this.router.navigate(['/auth'])
+  }
 }
